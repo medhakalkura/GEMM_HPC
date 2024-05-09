@@ -70,11 +70,8 @@ int main(){
   int Ni,Nj,Nk;
 
 
-  // printf("Specify Matrix dimension Ni, Nj, Nk: ");
-  // scanf("%d %d %d", &Ni,&Nj,&Nk);
-  Ni = 1024;
-  Nj = 1024;
-  Nk = 1024;
+  printf("Specify Matrix dimension Ni, Nj, Nk: ");
+  scanf("%d %d %d", &Ni,&Nj,&Nk);
 
   h_A = (float *) malloc(sizeof(float)*Ni*Nk);
   h_B = (float *) malloc(sizeof(float)*Nk*Nj);
@@ -84,7 +81,6 @@ int main(){
   for (i=0; i<Ni; i++)
    for (k=0; k<Nk; k++)
     h_A[k*Ni+i] = rand();
-  
   for (k=0; k<Nk; k++)
    for (j=0; j<Nj; j++)
     h_B[k*Nj+j] = rand();
@@ -157,7 +153,7 @@ int main(){
               break;
       case 1: if(Ni%BLOCK_SIZE == 0 && Nj%BLOCK_SIZE==0 && Nk%BLOCK_SIZE==0)
               {
-                if((Ni == Nj && Nj==Nk) || (Ni==Nj && Nj>Nk))
+                if((Ni == Nj && Nj==Nk) )
                 {
                   dim3 grid(ceil((Ni/4)/float(block.x)),ceil((Nj/4)/float(block.y)));
                   aTb_gpu<<<grid, block>>>(d_A, d_B, d_C,Ni,Nj,Nk); printf("ATB ");

@@ -574,3 +574,4 @@ __global__ void aTbT_gpu(const float *__restrict__ A, const float *__restrict__ 
     }
   }
 }
+
